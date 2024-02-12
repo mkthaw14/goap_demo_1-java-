@@ -22,6 +22,7 @@ public class Planner {
         return foundOne;
     }
 
+
     private boolean buildActionTree(ActionNode parent, List<ActionNode> leaves, List<Action> availableActions, Map<String, Boolean> currentWorldState) {
         boolean foundOne = false;
         for(var action: availableActions) {
@@ -33,6 +34,15 @@ public class Planner {
                 System.out.println("Found Action >>>> " + action);
                 if(matchAllCondition(newWorldState, goalState)) { // if the effect of action match with goal state
                     leaves.add(node); // register linkedlist of nodes to array list (adding tail node to list) [action3 {root=action2 {root=action1 } } ]
+                                        /* The data structure is as follows
+                                         * Note order doesn't need to be sequential
+                                         * let consider action1 is initial action
+                                         * action9 and 5 are possible action to satisfy the goal
+                                         * action4 has two possible branching i.e action9 and 6
+                                         * leaves : [
+                                         * 0: [action9 => action4 => action3 => action1]
+                                         * 1: [action5 => action6 => action4]
+                                         * ]*/
                     foundOne = true;
                 }
                 else{

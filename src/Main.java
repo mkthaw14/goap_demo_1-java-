@@ -43,6 +43,16 @@ public class Main {
         openDoor.effects.put("locked_door", false);
         openDoor.effects.put("door_open", true);
 
+
+        Action breakDoor = new Action("Break Door", 3);
+        breakDoor.preConditions.put("has_key", false);
+        breakDoor.preConditions.put("locked_door", true);
+        breakDoor.preConditions.put("door_open", false);
+
+        breakDoor.effects.put("has_key", false);
+        breakDoor.effects.put("locked_door", false);
+        breakDoor.effects.put("door_open", true);
+
         List<Action> actionList = List.of(grabKey, unlockDoor, openDoor);
         Planner planner = new Planner(actionList, currentWorldState, goalState);
         System.out.println("plan success " + planner.plan());
